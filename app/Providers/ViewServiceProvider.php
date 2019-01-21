@@ -15,19 +15,22 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $categories = Cache::remember('categories', 10, function(){
-            return \App\Models\Category::withCount('products')->get();
-        });
+        View::composer('*', function($view){
+            $categories = Cache::remember('categories', 10, function(){
+                return \App\Models\Category::withCount('products')->get();
+            });
 
-        $properties = Cache::remember('properties', 10, function(){
-            return \App\Models\Property::all();
-        });
+            $properties = Cache::remember('properties', 10, function(){
+                return \App\Models\Property::all();
+            });
 
-        $contacts = \App\Models\About::contact()->first();
-        $contacts = !empty($contacts) ? $contacts->content : [];
-        View::share('all_categories', $categories);
-        View::share('all_properties', $properties);
-        View::share('contacts', $contacts);
+            $contacts = \App\Models\About::contact()->first();
+            $contacts = !empty($contacts) ? $contacts->content : [];
+
+            $view->with('all_categories', $categories);
+            $view->with('all_properties', $properties);
+            $view->with('contacts', $contacts);
+        });
 
         View::composer('home.common', function($view){
             $menus = Cache::remember('menus', 10, function(){
