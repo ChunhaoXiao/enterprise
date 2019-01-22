@@ -14,7 +14,7 @@
 		    </p>
 		    <p class="p-2">
 		    	@foreach($case->pictures as $picture)
-		    		<img src="{{asset('storage/'.$picture)}}">
+		    		<img src="{{asset('storage/'.$picture)}}" width="100%">
 		    	@endforeach
 		    </p>
 		</div>

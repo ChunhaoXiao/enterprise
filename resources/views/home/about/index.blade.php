@@ -34,7 +34,7 @@
 					@endif
 				    </dl>
 				@else
-					{!! $data->content?? '' !!}
+					<p>{!! $data->content?? '' !!}</p>
 				@endif
 			</div>
 		</div>
