@@ -3,7 +3,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-				
+				@category
+				@endcategory
 			</div>
 			<div class="col-md-9">
 				@component('components.breadcrumb')
